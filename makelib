@@ -1,0 +1,22 @@
+# === Compiler and standard ===
+CC := gcc
+STD := -std=c17
+
+# === Directories ===
+SRC := CoDec/src/
+INC := inc/
+BIN := bin/
+DOC := doc/
+CoDecInc := CoDec/include/
+CFLAGS := -Wall -O2 -fPIC
+PFLAGS := -I$(CoDecInc)
+LFLAGS := -shared
+
+CoDec.o: $(SRC)CoDec.c
+	$(CC) $(STD) $(CFLAGS) $(PFLAGS) -c $< -o $@
+
+libCoDec.so: CoDec.o
+	$(CC) $(STD) $(LFLAGS) -o $@ $^
+
+clean: 
+	rm -f *.o
